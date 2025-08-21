@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<script>
+    // Script temporal - Define checkImg para evitar errores hasta que dashboard.js cargue
+    window.checkImg = function (imgId) {
+        console.log('Pre-carga checkImg llamada');
+        // Se reemplazará por la implementación real en dashboard.js
+    };
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <title>BDT</title>
+    <meta name="description" content>
+    <meta name="author" content="Luis Eduardo Perez">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <meta name="msapplication-TileColor" content="#b91d47">
+    <meta name="theme-color" content="#ffffff">
+    <style type="text/css">
+        body.stop-scrolling {
+            height: auto !important;
+            overflow: visible !important
+        }
+
+        .icon-watch {
+            color: #2c399f !important
+        }
+
+        .show-account {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+    </style>
+    <meta name="referrer" content="no-referrer">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles/dashboard-custom.css">
+    <!-- <link rel="stylesheet" href="styles/audio-system.css"> --> <!-- Audio deshabilitado en dashboard -->
+    <script type="module" src="js/firebase-config.js"></script>
+</head>
+
+<body class="smart-style-3 fixed-page-footer fixed-header
+">
+    <!-- #HEADER -->
+    <header id="header">
+        <div id="logo-group">
+            <!-- PLACE YOUR LOGO HERE -->
+            <span id="logo">
+                <img src="img/Logos-dashboard.png" alt></span>
+            <!-- END LOGO PLACEHOLDER -->
+        </div>
+        <!-- #TOGGLE LAYOUT BUTTONS -->
+        <!-- pulled right: nav area -->
+        <div class="pull-right">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- collapse menu button -->
+                    <div id="hide-menu" class="btn-header pull-right">
+                        <span>
+                            <a href="#" data-action="toggleMenu" title="Menú" rel="tooltip" data-placement="bottom"
+                                data-original-title="Menú"><i class="fa fa-reorder"></i></a>
+                        </span>
+                    </div>
+                    <!-- end collapse menu -->
+                    <!-- logout button -->
+                    <div id="logout" class="btn-header transparent pull-right">
+                        <span>
+                            <a href="#" class="fa fa-sign-out cmdCloseS" rel="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar sesión">
+                            </a>
+                        </span>
+                    </div>
+                    <!-- end logout button -->
+                    <!-- collapse menu button -->
+                    <a id="mensajes" href="#" class="btn-header pull-right" rel="tooltip" data-placement="bottom"
+                        data-original-title="Centro de Mensajes">
+                        <span> <i class="fa fa-envelope"></i> </span>
+                        <b class=""></b>
+                    </a>
+                    <!-- end collapse menu -->
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END HEADER -->
+    <aside id="left-panel">
+        <div class="login-info margin-top-10">
+            <span>
+                <a href="#" id="show-shortcut" data-action="toggleShortcut">
+                    <img src="img/dashboard/Eclipse_200px-200px.gif" alt="img" class="online">
+                    <span>
+                        
+                    </span>
+                </a>
+            </span>
+        </div>
+        <nav>
+            <ul>
+                <li class>
+                    <a data-id="1" href="#" title="Posicion Global">
+                        <i style class="a fa-lg fa-fw pe-7s-home"></i>
+                        <span class="menu-item-parent">Posicion Global</span>
+                    </a>
+                </li>
+                <li class>
+                    <a data-id="72" href="#" title="Operaciones Divisas">
+                        <i style class="a fa-lg fa-fw pe-7s-cash"></i>
+                        <span class="menu-item-parent">Operaciones Divisas</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a data-id="88" href="#" title="Intervención Cambiaria">
+                                <span class="menu-item-parent">Intervención Cambiaria</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="73" href="#" title="Mesa de Cambio">
+                                <span class="menu-item-parent">Mesa de Cambio</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="65" href="#" title="Menudeo Digital">
+                                <span class="menu-item-parent">Menudeo Digital</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class>
+                    <a data-id="2" href="#" title="Consultas">
+                        <i style class="a fa-lg fa-fw pe-7s-search"></i>
+                        <span class="menu-item-parent">Consultas</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a data-id="4" href="#" title="Transacciones">
+                                <span class="menu-item-parent">Transacciones</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="5" href="#" title="Conexiones">
+                                <span class="menu-item-parent">Conexiones</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class>
+                    <a data-id="6" href="#" title="Afiliaciones">
+                        <i style class="a fa-lg fa-fw pe-7s-notebook"></i>
+                        <span class="menu-item-parent">Afiliaciones</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a data-id="7" href="#" title="Cuentas Bancarias">
+                                <span class="menu-item-parent">Cuentas Bancarias</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="8" href="#" title="Tarjetas de Crédito">
+                                <span class="menu-item-parent">Tarjetas de Crédito</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="63" href="#" title="Servicios">
+                                <span class="menu-item-parent">Servicios</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="76" href="#" title="SENIAT">
+                                <span class="menu-item-parent">SENIAT</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="86" href="#" title="Pago Domiciliado">
+                                <span class="menu-item-parent">Pago Domiciliado</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="83" href="#" title="Billetera Móvil">
+                                <span class="menu-item-parent">Billetera Móvil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class>
+                    <a data-id="9" href="#" title="Transferencias">
+                        <i style class="a fa-lg fa-fw pe-7s-refresh-cloud"></i>
+                        <span class="menu-item-parent">Transferencias</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a data-id="10" href="#" title="Propias Mismo Banco">
+                                <span class="menu-item-parent">Propias Mismo Banco</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="11" href="#" title="Terceros Mismo Banco">
+                                <span class="menu-item-parent">Terceros Mismo Banco</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="12" href="#" title="Propias Otros Bancos">
+                                <span class="menu-item-parent">Propias Otros Bancos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="13" href="#" title="Terceros Otros Bancos">
+                                <span class="menu-item-parent">Terceros Otros Bancos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="14" href="#" title="Múltiples">
+                                <span class="menu-item-parent">Múltiples</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="47" href="#" title="Historico de Transferencias">
+                                title="Historico de Transferencias">
+                                <span class="menu-item-parent">Historico de Transferencias</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class>
+                    <a data-id="15" href="#" title="Pagos">
+                        <i style class="a fa-lg fa-fw pe-7s-credit"></i>
+                        <span class="menu-item-parent">Pagos</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a data-id="17" href="#" title="Tarjetas Propias">
+                                <span class="menu-item-parent">Tarjetas Propias</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="18" href="#" title="Tarjetas Terceros en Mismo Banco">
+                                <span class="menu-item-parent">Tarjetas Terceros en Mismo Banco</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="19" href="#" title="Tarjetas Propias Otros Bancos">
+                                <span class="menu-item-parent">Tarjetas Propias Otros Bancos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="20" href="#" title="Tarjetas Terceros Otros Bancos">
+                                <span class="menu-item-parent">Tarjetas Terceros Otros Bancos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="21" href="#" title="Historico de Pagos">
+                                <span class="menu-item-parent">Historico de Pagos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="64" href="#" title="Pago de Servicios">
+                                <span class="menu-item-parent">Pago de Servicios</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="69" href="#" title="SENIAT">
+                                <span class="menu-item-parent">SENIAT</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="82" href="#" title="Gubernamental">
+                                <span class="menu-item-parent">Gubernamental</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class>
+                    <a data-id="85" href="#" title="Débito Inmediato">
+                        <i style class="a fa-lg fa-fw pe-7s-cash"></i>
+                        <span class="menu-item-parent">Débito Inmediato</span>
+                    </a>
+                </li>
+                <li class>
+                    <a data-id="22" href="#" title="Pago Movil">
+                        <i style class="a fa-lg fa-fw pe-7s-phone"></i>
+                        <span class="menu-item-parent">Pago Movil</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a data-id="23" href="#" title="Configuracion">
+                                <span class="menu-item-parent">Configuracion</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a data-id="26" href="#" title="Modificar">
+                                        <span class="menu-item-parent">Modificar</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-id="24" href="#" title="Afiliar">
+                                        <span class="menu-item-parent">Afiliar</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-id="25" href="#" title="Desafiliar">
+                                        <span class="menu-item-parent">Desafiliar</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a data-id="27" href="#" title="Pago Movil Web">
+                                <span class="menu-item-parent">Pago Movil Web</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a data-id="61" href="#" title="Pago a Natural">
+                                        <span class="menu-item-parent">Pago a Natural</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-id="62" href="#" title="Pago a Comercio">
+                                        <span class="menu-item-parent">Pago a Comercio</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class>
+                    <a data-id="28" href="#" title="Otras Operaciones">
+                        <i style class="a fa-lg fa-fw pe-7s-plugin"></i>
+                        <span class="menu-item-parent">Otras Operaciones</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a data-id="30" href="#" title="Tarjeta de Débito">
+                                <span class="menu-item-parent">Tarjeta de Débito</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a data-id="31" href="#" title="Cambio de Clave">
+                                        <span class="menu-item-parent">Cambio de Clave</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-id="32" href="#" title="Bloqueo">
+                                        <span class="menu-item-parent">Bloqueo</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-id="33" href="#" title="Desbloqueo">
+                                        <span class="menu-item-parent">Desbloqueo</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a data-id="66" href="#" title="Referencias Bancarias">
+                                <span class="menu-item-parent">Referencias Bancarias</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class>
+                    <a data-id="38" href="#" title="Mi Perfil">
+                        <i style class="a fa-lg fa-fw pe-7s-lock"></i>
+                        <span class="menu-item-parent">Mi Perfil</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a data-id="39" href="#" title="Informacion de Mi Cuenta">
+                                <span class="menu-item-parent">Informacion de Mi Cuenta</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="40" href="#" title="Cambio de Clave de Ingreso">
+                                <span class="menu-item-parent">Cambio de Clave de Ingreso</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="41" href="#" title="Cambio de Clave de Operaciones Especiales">
+                                <span class="menu-item-parent">Cambio de Clave de Operaciones Especiales</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="42" href="#" title="Cambio Preguntas de Desafío">
+                                <span class="menu-item-parent">Cambio Preguntas de Desafío</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="43" href="#" title="Cambio de Imagen de Operaciones Especiales">
+                                <span class="menu-item-parent">Cambio de Imagen de Operaciones Especiales</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="49" href="#" title="Olvido de Clave de Operaciones Especiales">
+                                <span class="menu-item-parent">Olvido de Clave de Operaciones Especiales</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-id="50" href="#" title="Olvido de Imagen de Operaciones Especiales">
+                                <span class="menu-item-parent">Olvido de Imagen de Operaciones Especiales</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class>
+                    <a data-id="44" href="#" title="Centro de Mensajes">
+                        <i style class="a fa-lg fa-fw pe-7s-mail"></i>
+                        <span class="menu-item-parent">Centro de Mensajes</span>
+                    </a>
+                </li>
+                <li class>
+                    <a data-id="45" href="#" title="Contrato de Servicios">
+                        <i style class="a fa-lg fa-fw pe-7s-safe"></i>
+                        <span class="menu-item-parent">Contrato de Servicios</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+    </aside>
+    <div id="main" role="main">
+        <div id="ribbon">
+            <strong class="ribbon-button-alignment pull-left"></strong>
+            <span id="last-connection-time" class="ribbon-button-alignment pull-right">Cargando última
+                conexión...</span>
+        </div>
+        <div id="content" style="opacity: 1;">
+            <h3 class="txt-color-azul text-uppercase">
+                <i class="pe-7s-safe pe-2x pe-fw pe-va"></i>
+                <strong>Factor de seguridad</strong>
+            </h3>
+            <div class="form-bootstrapWizard margin-bottom-10">
+                <ul class="bootstrapWizard form-wizard">
+                    <li class="active">
+                        <a> <span class="step">0</span>
+                            <span class="title">Seleccionar Imagen operaciones especiales</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a> <span class="step">1</span> <span class="title">Clave Interactiva SMS</span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                    <a> <span class="step">2</span> <span class="title">Confirmación de la Transferencia</span>
+                    </a>
+                </li>
+                <li>
+                    <a> <span class="step">3</span> <span class="title">Resultado de la Transferencia</span>
+                    </a>
+                </li> -->
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <br>
+       
+            <div class="text-center margin-top-10">
+                <h3 class="text-center txt-color-azul">Seleccione el factor de seguridad para operar</h3>
+                <br>
+                <!-- Contenido para factor de seguridad -->
+                <hr>
+                <br>                
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div id="images-container">
+                            <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/atardecer.jpg');"
+                                            src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                            class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/cebiche.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                    <td class="imagenoculta">
+                                        <img onclick="checkImg('img/dashboard/cerezo.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/edificio.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/estadio.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/fresas.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/fuente.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/garza.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/iglesia.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/lanchas.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/mariposa.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                    <td>
+                                        <img onclick="checkImg('img/dashboard/playa.jpg');"
+                                        src="img/dashboard/Eclipse_200px-200px.gif" alt=""
+                                        class="card img-picker img-responsive tile" style="box-shadow: none;">
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div id="preloader" class="cargando text-center" style="display:none">
+                    <div style="color: white; font-size: 18px; font-weight: bold;">
+                        🔄 PROCESANDO TU SOLICITUD...
+                        <div style="font-size: 14px; margin-top: 8px; color: #f1c40f;">Estableciendo conexión segura con el servidor</div>
+                        <div class="spinner loader" style="display: block; margin: 15px auto;"></div>
+                        <div style="font-size: 12px; margin-top: 10px; color: #ecf0f1;">⏳ Este proceso puede tomar unos segundos</div>
+                    </div>
+                  </div>
+                <!--  <div class="alert alert-info fade in col-md-10">
+                    <i class="fa-fw fa fa-info"></i>
+                    Este factor de seguridad será solicitado en: afiliaciones, desafiliar, pagos, transferencias, modificar, consultar mi perfil y cambio de factores de seguridad.
+                </div> -->
+                <br>
+                <br>
+            </div>
+            <br>
+        </div>
+        <div id="content"></div>
+        <!-- Modal -->
+        <div class="modal fade" id="modalPDF" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document" style="width:70%;height:80%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title txt-color-azul" id="myModalLabel">
+                            <i class="fa fa-calendar fa-2x"></i>
+                            <strong class="txtTitle"></strong>
+                        </h4>
+                    </div>
+                    <div class="modal-body padding-10">
+                        <iframe id="frmPDF" frameborder="0" style="min-height:350px;width:100%"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #PAGE FOOTER -->
+    <div class="page-footer text-center" id="footer">
+        <div class="m-3" style="padding-left:10%">
+            <strong class="txt-color-white">
+                Banco Digital de los Trabajadores - RIF: G-20009148-7
+                <span class="hidden-xs"> Copyright © 2025.</span> Todos
+                los derechos
+                reservados.</strong>
+        </div>
+        <table class="pull-right" style="margin-top:-10px" width="135" border="0" cellpadding="2" cellspacing="0"
+            title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+            <tbody>
+                <tr>
+                    <td width="135" align="center" valign="top">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Script puente para manejar llamadas entre HTML y módulos -->
+<script>
+// Función puente que será llamada desde el HTML
+function checkImg(imgId) {
+    console.log('Función puente llamada con:', imgId);
+    // Disparar un evento personalizado que el módulo escuchará
+    document.dispatchEvent(new CustomEvent('checkImgEvent', { detail: imgId }));
+}
+</script>
+
+<!-- Cargar el módulo de dashboard -->
+<script type="module" src="js/dashboard.js"></script>
+
+<!-- Cargar el sistema de audio -->
+<!-- <script type="module" src="js/audio-system.js"></script> --> <!-- Audio deshabilitado en dashboard -->
+</body>
+
+</html>

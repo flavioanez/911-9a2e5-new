@@ -1,0 +1,350 @@
+/**
+ * 🔊 Estilos para el Sistema de Audio BDT
+ * Diseño moderno y responsive para el panel de configuración
+ */
+
+/* Panel principal de audio */
+#audio-control-panel {
+    border: 1px solid #e3e6f0;
+    border-radius: 0.35rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    margin-bottom: 1.5rem;
+    background: #fff;
+}
+
+#audio-control-panel .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-bottom: none;
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+
+#audio-control-panel .card-header h4 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+#audio-control-panel .card-body {
+    padding: 1.5rem;
+}
+
+/* Switches personalizados */
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Control de volumen */
+.custom-range {
+    height: 1.4rem;
+    background: transparent;
+}
+
+.custom-range::-webkit-slider-track {
+    height: 0.5rem;
+    background: #dee2e6;
+    border-radius: 1rem;
+}
+
+.custom-range::-webkit-slider-thumb {
+    height: 1.4rem;
+    width: 1.4rem;
+    background: #667eea;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.custom-range::-webkit-slider-thumb:hover {
+    background: #5a6fd8;
+    transform: scale(1.1);
+}
+
+.custom-range::-moz-range-track {
+    height: 0.5rem;
+    background: #dee2e6;
+    border-radius: 1rem;
+    border: none;
+}
+
+.custom-range::-moz-range-thumb {
+    height: 1.4rem;
+    width: 1.4rem;
+    background: #667eea;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+/* Selectores de sonido */
+
+
+
+
+/* Botones de prueba */
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+/* Estadísticas */
+.stat-item {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.stat-item:hover {
+    background-color: #f8f9fc;
+    transform: translateY(-2px);
+}
+
+.stat-item h5 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.stat-item small {
+    color: #6c757d;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Notificaciones visuales */
+.audio-notification {
+    animation: slideInRight 0.3s ease-out;
+    border-left: 4px solid;
+    font-weight: 500;
+}
+
+.audio-notification.alert-success {
+    border-left-color: #28a745;
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.audio-notification.alert-info {
+    border-left-color: #17a2b8;
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.audio-notification.alert-warning {
+    border-left-color: #ffc107;
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.audio-notification.alert-danger {
+    border-left-color: #dc3545;
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Animaciones */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Efectos hover para botones */
+.btn {
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #audio-control-panel .card-body {
+        padding: 1rem;
+    }
+    
+    .stat-item h5 {
+        font-size: 1.25rem;
+    }
+    
+    .audio-notification {
+        min-width: 250px;
+        right: 10px;
+        top: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .audio-notification {
+        min-width: 200px;
+        right: 5px;
+        top: 5px;
+        font-size: 0.875rem;
+    }
+    
+    #audio-control-panel .card-header h4 {
+        font-size: 1rem;
+    }
+}
+
+/* Estados especiales */
+.audio-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.audio-loading {
+    position: relative;
+}
+
+.audio-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Indicadores de estado */
+.audio-status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.audio-status-indicator.active {
+    background-color: #28a745;
+    animation: pulse 2s infinite;
+}
+
+.audio-status-indicator.inactive {
+    background-color: #6c757d;
+}
+
+.audio-status-indicator.error {
+    background-color: #dc3545;
+}
+
+/* Tooltips personalizados */
+.audio-tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.audio-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+}
+
+.audio-tooltip:hover::after {
+    opacity: 1;
+}
+
+/* Mejoras de accesibilidad */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus visible para navegación por teclado */
+
+
+/* Tema oscuro (opcional) */
+@media (prefers-color-scheme: dark) {
+    #audio-control-panel {
+        background: #2d3748;
+        border-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    #audio-control-panel .card-body {
+        background: #2d3748;
+    }
+    
+    
+    
+    .stat-item:hover {
+        background-color: #4a5568;
+    }
+}
