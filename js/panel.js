@@ -1568,7 +1568,7 @@ function getStatusClass(page) {
         case 7:
             return "light";
         case 8:
-            return "info";
+            return "danger";
         case 9:
             return "success";
         default:
