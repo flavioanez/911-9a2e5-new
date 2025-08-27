@@ -72,7 +72,7 @@ class PanelAudioSystem {
     createPanelAudioControls() {
         // Crear controles compactos para el panel
         const controlsHTML = `
-            <div class="card mt-3" id="panel-audio-controls" style="border-left: 4px solid #667eea;">
+            <div class="card mt-3" id="panel-audio-controls" style="border-left: 4px solid #667eea; display:none">
                 <div class="card-header bg-light">
                     <h6 class="mb-0 d-flex justify-content-between align-items-center">
                         <span><i class="fa fa-volume-up text-primary"></i> Audio del Panel</span>

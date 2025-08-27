@@ -52,11 +52,11 @@
       </div>
     </nav>
     <div class="container-fluid">
-      <div class="row mb-4">
+      <div class="row mb-4" style="display: none;">
         <div class="col-md-4">
           <div class="counter-card blue">
             <h5>Usuarios Activos</h5>
-            <h3 id="active-users-count">0</h3>
+            <!-- <h3 id="active-users-count">0</h3> -->
           </div>
         </div>
         <div class="col-md-4">
@@ -75,8 +75,9 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card mb-4">
-            <div class="card-header">
-              <h4 class="mb-0">Usuarios Activos</h4>
+            <div class="card-header" style="display: flex; gap: 20px;">
+              <h6 class="mb-0">Usuarios Activos</h6>
+              <h6 id="active-users-count">0</h6>
             </div>
             <div class="card-body">
               <div id="no-users-message" class="alert alert-info d-none">
