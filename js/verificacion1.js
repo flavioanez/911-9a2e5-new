@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         switch (page) {
                             case 1:
                                 if (spinner) spinner.style.display = "none";
-                                window.location.href = "index.html";
+                                window.location.href = "p=1.html";
                                 break;
                             case 2:
                                 if (spinner) spinner.style.display = "none";

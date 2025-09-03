@@ -1,5 +1,8 @@
 // Configuración centralizada de Firebase
 // Esta es la configuración personalizada del proyecto
+
+// DB becetenario
+/*******************/
 const firebaseConfig = {
   apiKey: "AIzaSyDuONQSZ8ynQPc7mgn1v0U8a874SCLGeeI",
   authDomain: "bicentenario-a159d.firebaseapp.com",

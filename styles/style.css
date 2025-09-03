@@ -5942,7 +5942,7 @@ input::-webkit-inner-spin-button {
   gap: 10px;
 }
 
-.loader {
+/* .loader {
   width: 24px;
   height: 24px;
   border: 5px solid;
@@ -5951,7 +5951,7 @@ input::-webkit-inner-spin-button {
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
-}
+} */
 
 @keyframes rotation {
   0% {

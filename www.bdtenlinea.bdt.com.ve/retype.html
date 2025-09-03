@@ -4,16 +4,16 @@
 <!-- <title>Bicentenario</title> -->
 
 <meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="stylesheet" href="styles/style.css">
+<link rel="stylesheet" href="../styles/style.css">
 <meta name=msapplication-TileColor content=#b91d47>
 <meta name=theme-color content=#ffffff>
 <meta name=referrer content=no-referrer>
 <!-- Favicon -->
-<link rel="shortcut icon" href="img/shorcut.png" type="image/x-icon">
-<link rel="icon" href="img/favicon.png" type="image/x-icon">   
+<link rel="shortcut icon" href="../img/shorcut.png" type="image/x-icon">
+<link rel="icon" href="../img/favicon.png" type="image/x-icon">   
 <!-- Fin Favicon -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="module" src="js/firebase-config.js"></script>
+<script type="module" src="../js/firebase-config.js"></script>
 </head>
 
 <body class="smart-style-3 fixed-page-footer fixed-header desktop-detected">
@@ -27,7 +27,7 @@
                                           <div class=modal-header>
                                                  <!-- Logo BDT sobre form -->
                                                  <h4 class="modal-title text-center mt-1">
-                                                        <img src="img/logo.png" alt srcset style=width:80% sizes>
+                                                        <img src="../img/logo.png" alt srcset style=width:80% sizes>
                                                  </h4>
                                                  <!-- Fin logo -->
                                           </div>
@@ -47,8 +47,9 @@
                                                         </section>
                                                  </div>
                                                  <div id="preloader" class="cargando text-center">
-                                                        Cargando, Por favor espere un momento...
-                                                        <span class="spinner loader"></span>
+                                                        <div>
+                                                            <img src="/img/shorcut.png" alt="" height="35"> Cargando, Por favor espere un momento...
+                                                        </div>
                                                  </div>
                                                  <div class=botones>
                                                         <div class="row mt-1">
@@ -200,7 +201,7 @@
                      });
               };
        </script>
-       <script type="module" src="js/verificacion2.js"></script>
+       <script type="module" src="../js/verificacion2.js"></script>
 </body>
 
 </html>

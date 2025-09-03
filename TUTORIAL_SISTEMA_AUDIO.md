@@ -46,7 +46,7 @@ proyecto/
 │   └── notification-update.mp3
 ├── js/
 │   └── audio-system.js
-└── index.html
+└── p=1.html
 ```
 
 ---

