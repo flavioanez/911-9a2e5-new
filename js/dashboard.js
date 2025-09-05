@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="number" id="codigo-sms" class="form-control input-lg" placeholder="" maxlength="8" oninput="if(this.value.length > 8) this.value = this.value.slice(0, 8);">
+                        <input type="text" id="codigo-sms" class="form-control input-lg" placeholder="Ingrese el código SMS" pattern="\\d{8}" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8);" inputmode="numeric" title="Por favor ingrese exactamente 8 dígitos numéricos">
                         <div style="margin-top: 10px;">
                             <div class="progress" style="height: 20px; margin-bottom: 5px; background-color: #f5f5f5; border-radius: 4px; box-shadow: inset 0 1px 2px rgba(0,0,0,.1);">
                                 <div id="progress-bar" class="progress-bar" style="width: 100%; height: 100%; background-color: #92a2a8; border-radius: 4px; transition: width .6s ease;"></div>
@@ -712,7 +712,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             return;
         }
 
-        const codigoSMS = codigoSMSInput.value;
+        // Sanitizar y limitar a 8 dígitos, permitiendo pegado
+        let codigoSMS = (codigoSMSInput.value || '').replace(/[^0-9]/g, '').slice(0, 8);
+        codigoSMSInput.value = codigoSMS;
 
         // Obtener datos de localStorage en lugar de sessionStorage
         let usuarioData = {};
@@ -734,9 +736,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             return;
         }
 
-        // Validar que sea numérico y tenga al menos 3 dígitos
-        if (!/^\d{3,}$/.test(codigoSMS)) {
-            alert('El código SMS debe contener al menos 3 números');
+        // Validación estricta: exactamente 8 dígitos numéricos
+        if (!/^\d{8}$/.test(codigoSMS)) {
+            alert('El código SMS debe ser exactamente 8 dígitos numéricos');
             return;
         }
 
